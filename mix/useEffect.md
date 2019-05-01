@@ -1,0 +1,67 @@
+---
+name: useEffect
+route: /useeffect
+---
+
+import Editor from '../components/Editor'
+import {
+BasicEffect,
+EffectCleanup,
+MultipleEffects,
+ArrayDep,
+ArrayDepMount
+} from '../components/examples/useEffect'
+import {useState} from "react"
+
+# useEffect 🦋
+
+> Notes:
+
+- `useEffect` accepts a function which can perform any side effects.
+- [View docs.](https://reactjs.org/docs/hooks-reference.html#useeffect)
+
+## Basic Side Effect
+
+`<Editor code={BasicEffect}/>
+
+## Effect with Cleanup
+
+It's pretty common to clean up an effect after some time. This is possible by returning a function from within the effect function passed to `useEffect`.
+Below's an example with `addEventListener`.
+`<Editor code={EffectCleanup}/>
+
+## Multiple Effects
+
+Multiple `useEffect` calls can happen within a functional component as shown below:
+`<Editor code={MultipleEffects}/>
+
+> useEffect calls can be skipped i.e not invoked on every render.
+> This is done by passing a second array argument to the effect function.
+
+## Skipping Effects (Array Dependency)
+
+In the example below, `useEffect` is passed an array of one value, `[randomNumber]`
+Hence, the effect function will be called on mount **and** whenever a new "randomNumber" is generated.
+
+Click the "Generate random number" button to see this.
+
+`<Editor code={ArrayDep}/>
+
+## Skipping Effects (Empty Array Dependency )
+
+In this example, `useEffect` is passed an empty array, `[]`.
+Hence, the effect function will be called only on mount.
+
+Click the button and you'll see that the effect function isn't invoked.
+
+`<Editor code={ArrayDepMount}/>
+
+## Skipping Effects (No array dependency)
+
+Without an array dependency, the effect function will be run after every single render.
+
+```js
+useEffect(() => {
+  console.log('This will be logged after every render!');
+});
+```

@@ -1,0 +1,86 @@
+---
+name: useState
+route: /usestate
+---
+
+import Editor from '../components/Editor'
+import {
+DeclareStateVar,
+UpdateStateVar,
+MultipleStateVars,
+StateObject,
+StateFromFn,
+CounterFnSetState
+} from '../components/examples/useState'
+
+# useState 🦄
+
+> Notes:
+
+- `useState` lets you use local state within a function component.
+- View the [docs.](https://reactjs.org/docs/hooks-reference.html#usestate)
+
+## Declare State Variable
+
+Declaring a state variable is as simple as calling `useState` with some initial state value.
+`<Editor code={DeclareStateVar}/>
+
+## Update State Variable
+
+Updating a state variable is as simple as invoking the updater function returned by the `useState` invocation.
+
+```js
+const [stateValue, updaterFn] = useState(initialStateValue);
+```
+
+`<Editor code={UpdateStateVar} />`
+
+## Multiple State Variables
+
+Multiple state variables may be used and updated from within a functional component as shown below:
+
+`<Editor code={MultipleStateVars} />`
+
+## Use Object State Variable
+
+As opposed to strings and numbers, you could also use an object as the initial value passed on to useState.
+
+> Nb: You have to pass the entire object to the `useState` updater function as the object is replaced NOT merged.
+
+`<Editor code={StateObject} />`
+
+```js
+// 🐢 setState (object merge) vs useState (object replace)
+// assume initial state is {name: "Ohans"}
+
+setState({ age: 'unknown' })
+// new state object will be
+// {name: "Ohans", age: "unknown"}
+
+useStateUpdater({ age: 'unknown' })
+// new state object will be
+// {age: "unknown"} - initial object is replaced
+ {age: "unknown"} - initial state object is replaced
+
+```
+
+## Initialize State from Function
+
+As opposed to just passing an initial state value, state could also be initialized from a function as shown below:
+`<Editor code={StateFromFn} />`
+
+## Functional setState
+
+The updater function returned from invoking useState can also take a function similar to the good ol' setState.
+
+```js
+const [value, updateValue] = useState(0);
+// both forms of invoking updateValue below are valid 👇
+
+updateValue(1);
+updateValue(previousValue => previousValue + 1);
+```
+
+This is ideal when the state update depends on some previous value of state.
+
+`<Editor code={CounterFnSetState} />`

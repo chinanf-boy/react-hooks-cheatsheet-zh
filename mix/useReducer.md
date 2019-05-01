@@ -1,0 +1,44 @@
+---
+name: useReducer
+route: /usereducer
+---
+
+
+import Editor from '../components/Editor'
+import { 
+    BasicExample,
+    InitLazy,
+    ImitateSetState
+} from '../components/examples/useReducer'
+
+
+# useReducer 🦖
+ 
+> Notes: 
+ - useReducer may be used as an alternative to useState. 
+ - Ideal for complex state logic  where there's a dependency on previous state values or *a lotta* state sub values
+ - depending on your use case you may find useReducer to quite testable 
+ - [View docs.](https://reactjs.org/docs/hooks-reference.html#usereducer) 
+
+## Basic Usage 
+As opposed to calling `useState`, call `useReducer` with a `reducer` and `initialState` as shown below. 
+The `useReducer` call returns the state property and a `dispatch` function. 
+
+<Editor noInline code={BasicExample}/>
+
+## Initialize State Lazily 
+`useReducer` takes a third function parameter. You may initialize state from this function, and whatever's returned from this function is returned as the state object.
+This function will be called with `initialState` - the second parameter. 
+
+<Editor noInline code={InitLazy}/>
+
+
+## Imitate this.setState's behaviour 
+`useReducer` uses a reducer that isn't as strict as Redux's e.g. the second parameter passed 
+to the reducer, `action` doesn't have to have a `type` property. 
+This allows for interesting manipulations such as renaming the second parameter and doing the following: 
+
+<Editor noInline code={ImitateSetState}/>
+
+<!-- todo: usecase where no re-renders when
+useReducer returns the same state object -->

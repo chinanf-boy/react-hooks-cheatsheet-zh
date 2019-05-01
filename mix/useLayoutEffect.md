@@ -1,0 +1,39 @@
+---
+name: useLayoutEffect
+route: /uselayoutEffect
+---
+
+import Editor from '../components/Editor'
+import {
+ArrayDep,
+} from '../components/examples/useLayoutEffect'
+
+# useLayoutEffect 🎩
+
+> Notes:
+
+- `useLayoutEffect` has the very same signature as `useEffect`.
+- see difference between `useLayoutEffect` and `useEffect` below.
+- View the [docs](https://reactjs.org/docs/hooks-reference.html#uselayouteffect)
+
+```js
+useLayoutEffect(() => {
+  //do something
+}, [arrayDep]);
+```
+
+## Similar Usage as useEffect
+
+`<Editor code={ArrayDep} />`
+
+## useLayoutEffect vs useEffect
+
+The function passed to `useEffect` fires after layout and paint.
+i.e after the render has been committed to the screen.
+
+This is okay for most side effects that should NOT block the browser from updating the screen.
+
+There are cases where you may not want the behaviour `useEffect` provides. e.g. if you need to make a visual change to
+the DOM as a side effect. To prevent the user from seeing flickers of changes, you may use `useLayoutEffect`.
+
+> The function passed to `useLayoutEffect` will be run before the browser updates the screen.
